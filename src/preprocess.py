@@ -79,13 +79,14 @@ def detect_feature_types(df: pd.DataFrame, target: str, id_cols: List[str]) -> T
     """
     # TODO: Implement feature type detection
     # 1. Get all columns except target and id_cols:
-    #    feature_cols = [c for c in df.columns if c not in id_cols and c != target]
+    feature_cols = [c for c in df.columns if c not in id_cols and c != target]
     # 2. Identify categorical columns (dtype == 'object'):
-    #    cat_cols = [c for c in feature_cols if df[c].dtype == 'object']
+    cat_cols = [c for c in feature_cols if df[c].dtype == 'object']
     # 3. Identify numeric columns (dtype in [int, float]):
-    #    num_cols = [c for c in feature_cols if df[c].dtype in ['int64', 'float64']]
+    num_cols = [c for c in feature_cols if df[c].dtype in ['int64', 'float64']]
     # 4. Return (cat_cols, num_cols)
-    pass
+    return cat_cols, num_cols
+    # pass
 
 
 # ============================================================================
@@ -111,13 +112,23 @@ def encode_categorical(df: pd.DataFrame, cat_cols: List[str]) -> Tuple[pd.DataFr
     """
     # TODO: Implement one-hot encoding
     # 1. Create a copy of the dataframe
+    df = df.copy()
     # 2. For each column in cat_cols:
-    #    a. Use pd.get_dummies(df[col], prefix=col, dtype=int) to one-hot encode
-    #    b. Drop the original column: df.drop(col, axis=1, inplace=True)
-    #    c. Add the new encoded columns: df = pd.concat([df, encoded], axis=1)
+    list_of_encoded_column_names = []
+    for col in cat_cols:
+        #    a. Use pd.get_dummies(df[col], prefix=col, dtype=int) to one-hot encode
+        encoded = pd.get_dummies(df[col], prefix=col, dtype=int)
+        list_of_encoded_column_names.extend(encoded.columns.tolist())
+
+        #    b. Drop the original column: df.drop(col, axis=1, inplace=True)
+        df.drop(col, axis=1, inplace=True)
+
+         #    c. Add the new encoded columns: df = pd.concat([df, encoded], axis=1)
+        df_with_encoded_cols = pd.concat([df, encoded], axis=1)
+        
     # 3. Keep track of all new column names created
     # 4. Return (df_with_encoded_cols, list_of_encoded_column_names)
-    #
+    return df_with_encoded_cols, list_of_encoded_column_names
     # HINT: When called in run_preprocessing(), you encode TRAIN first to get column names,
     # then when encoding TEST, you should only create those same columns (don't add new ones).
     # You can use pd.get_dummies(..., columns=...) or post-process to match columns.
@@ -143,12 +154,28 @@ def scale_numeric(df: pd.DataFrame, num_cols: List[str]) -> Tuple[pd.DataFrame, 
     """
     # TODO: Implement numeric scaling
     # 1. Create a copy of the dataframe
+    df = df.copy()
     # 2. For each column in num_cols:
+    means_dict = {}
+    stds_dict = {}
+
+    for col in num_cols:
     #    a. Handle missing values first: col.fillna(col.median())
+        df[col] = df[col].fillna(df[col].median())
+
     #    b. Calculate mean and std: mean = col.mean(), std = col.std()
+        means_dict[col] = df[col].mean()
+        stds_dict[col] = df[col].std()
+
     #    c. Standardize: (col - mean) / std
+        df[col] = (df[col] - means_dict[col]) / stds_dict[col]
+
+    scaled_df = df
+   
     # 3. Return (scaled_df, means_dict, stds_dict)
-    pass
+    return scaled_df, means_dict, stds_dict
+    
+    # pass
 
 
 # ============================================================================
