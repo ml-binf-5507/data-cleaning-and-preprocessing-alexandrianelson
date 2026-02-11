@@ -1,0 +1,7 @@
+age,income,patient_id_PAT0001,patient_id_PAT0002,patient_id_PAT0003,patient_id_PAT0004,patient_id_PAT0005,patient_id_PAT0008,patient_id_PAT0009,patient_id_PAT0010,patient_id_PAT0011,patient_id_PAT0012,patient_id_PAT0014,patient_id_PAT0015,patient_id_PAT0017,patient_id_PAT0018,patient_id_PAT0019,patient_id_PAT0020,patient_id_PAT0021,patient_id_PAT0022,patient_id_PAT0023,patient_id_PAT0024,patient_id_PAT0026,patient_id_PAT0027,patient_id_PAT0028,patient_id_PAT0029,city_Calgary,city_Montreal,city_Toronto,city_Vancouver,education_Bachelor,education_HS,education_Master,education_PhD,target
+-0.13590774577783987,-0.6080893618667905,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,1
+-0.34160595560376006,0.02643866790725176,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0
+-0.8264660216220017,-0.7138440334957975,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1
+-1.0468569607212022,-1.6656360781568609,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0
+-0.06244409941143971,-0.23794801116526584,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1
+0.11386865186792003,0.23794801116526584,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0

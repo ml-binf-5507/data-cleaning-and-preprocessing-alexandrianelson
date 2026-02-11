@@ -112,27 +112,29 @@ def encode_categorical(df: pd.DataFrame, cat_cols: List[str]) -> Tuple[pd.DataFr
     """
     # TODO: Implement one-hot encoding
     # 1. Create a copy of the dataframe
-    df = df.copy()
+    df_copy = df.copy()
     # 2. For each column in cat_cols:
     list_of_encoded_column_names = []
+    
     for col in cat_cols:
         #    a. Use pd.get_dummies(df[col], prefix=col, dtype=int) to one-hot encode
-        encoded = pd.get_dummies(df[col], prefix=col, dtype=int)
+        encoded = pd.get_dummies(df_copy[col], prefix=col, dtype=int)
         list_of_encoded_column_names.extend(encoded.columns.tolist())
 
         #    b. Drop the original column: df.drop(col, axis=1, inplace=True)
-        df.drop(col, axis=1, inplace=True)
+        df_copy.drop(col, axis=1, inplace=True)
 
          #    c. Add the new encoded columns: df = pd.concat([df, encoded], axis=1)
-        df_with_encoded_cols = pd.concat([df, encoded], axis=1)
+        df_copy = pd.concat([df_copy, encoded], axis=1)
         
+        df_with_encoded_cols = df_copy
     # 3. Keep track of all new column names created
     # 4. Return (df_with_encoded_cols, list_of_encoded_column_names)
     return df_with_encoded_cols, list_of_encoded_column_names
     # HINT: When called in run_preprocessing(), you encode TRAIN first to get column names,
     # then when encoding TEST, you should only create those same columns (don't add new ones).
     # You can use pd.get_dummies(..., columns=...) or post-process to match columns.
-    pass
+    #pass
 
 
 # ============================================================================
